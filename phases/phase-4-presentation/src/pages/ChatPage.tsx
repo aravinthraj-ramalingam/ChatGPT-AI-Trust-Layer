@@ -6,10 +6,12 @@ import { JudgmentPanel } from "../components/JudgmentPanel.js";
 import { StakesConfirmation } from "../components/StakesConfirmation.js";
 import { useChat } from "../hooks/useChat.js";
 import { submitLayerFeedback } from "../lib/feedback-client.js";
+import { getApiKey } from "../lib/judgment-service.js";
 
 /** Main chat — ChatGPT-style layout + stakes confirmation */
 export function ChatPage() {
   const chat = useChat();
+  const hasApiKey = Boolean(getApiKey());
 
   const composerProps = {
     onSubmit: chat.submitPrompt,
@@ -24,6 +26,11 @@ export function ChatPage() {
         {chat.isEmpty ? (
           <div className="empty-hero">
             <h2>What are you working on?</h2>
+            {!hasApiKey && (
+              <p className="api-key-notice">
+                Add your OpenAI API key in <strong>Settings ⚙</strong> or set <code>OPENAI_API_KEY</code> on the server.
+              </p>
+            )}
             <div className="prompt-center">
               <PromptComposer {...composerProps} variant="hero" />
             </div>

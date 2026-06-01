@@ -29,6 +29,10 @@ export default defineConfig({
     proxy: {
       "/feedback": { target: "http://localhost:8787" },
       "/turns": { target: "http://localhost:8787" },
+      "/api/chat": {
+        target: "http://localhost:8787",
+        changeOrigin: true,
+      },
     },
   },
 });

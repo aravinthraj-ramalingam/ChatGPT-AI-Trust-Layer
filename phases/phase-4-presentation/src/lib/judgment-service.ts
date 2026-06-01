@@ -4,37 +4,127 @@ import {
   shouldShowJudgmentUI,
   type FeatureFlags,
   type JudgmentResult,
-  type TurnResult,
 } from "@ttj/phase-3-pipeline";
-import { DEMO_ANSWER } from "./demo-content.js";
+
+const API_KEY_STORAGE = "ttj_openai_api_key";
+const BASE_URL_STORAGE = "ttj_openai_base_url";
+const MODEL_STORAGE = "ttj_openai_model";
 
 export type StreamHandler = (partialContent: string) => void;
 
-/** Answer layer with simulated streaming for Screen 2 */
-export class StreamingAnswerLayer implements AnswerLayer {
-  readonly name = "streaming-stub";
+export function getApiKey(): string {
+  return localStorage.getItem(API_KEY_STORAGE) ?? "";
+}
 
-  constructor(
-    private readonly onStream?: StreamHandler,
-    private readonly fullText: string = DEMO_ANSWER
-  ) {}
+export function setApiKey(key: string): void {
+  localStorage.setItem(API_KEY_STORAGE, key);
+}
+
+export function getBaseUrl(): string {
+  return localStorage.getItem(BASE_URL_STORAGE) ?? "https://api.openai.com/v1";
+}
+
+export function setBaseUrl(url: string): void {
+  localStorage.setItem(BASE_URL_STORAGE, url);
+}
+
+export function getModel(): string {
+  return localStorage.getItem(MODEL_STORAGE) ?? "gpt-4o-mini";
+}
+
+export function setModel(model: string): void {
+  localStorage.setItem(MODEL_STORAGE, model);
+}
+
+/** Answer layer that calls the serverless /api/chat endpoint with streaming */
+export class StreamingAnswerLayer implements AnswerLayer {
+  readonly name = "api-streaming";
+
+  constructor(private readonly onStream?: StreamHandler) {}
 
   async generate(input: GenerateAnswerInput) {
-    const words = this.fullText.split(/\s+/);
-    let accumulated = "";
+    const apiKey = getApiKey();
+    const model = getModel();
+    const baseUrl = getBaseUrl();
 
-    for (const word of words) {
-      accumulated = accumulated ? `${accumulated} ${word}` : word;
-      this.onStream?.(accumulated);
-      await delay(28);
+    try {
+      const content = await streamChatCompletion(apiKey, baseUrl, model, input.promptContent, this.onStream);
+      return { content };
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      const fallback = `Error generating answer: ${message}`;
+      this.onStream?.(fallback);
+      return { content: fallback };
     }
-
-    if (input.promptContent.length < 3) {
-      return { content: "Please provide more detail in your prompt." };
-    }
-
-    return { content: this.fullText };
   }
+}
+
+async function streamChatCompletion(
+  apiKey: string,
+  baseUrl: string,
+  model: string,
+  prompt: string,
+  onStream?: StreamHandler,
+): Promise<string> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (apiKey) {
+    headers["x-api-key"] = apiKey;
+  }
+
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ prompt, model, baseUrl }),
+  });
+
+  if (!response.ok) {
+    let errorMessage = `API error ${response.status}`;
+    try {
+      const errJson = await response.json();
+      if (errJson.error) errorMessage = errJson.error;
+    } catch {
+      // ignore parse failure
+    }
+    throw new Error(errorMessage);
+  }
+
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error("No response body");
+
+  const decoder = new TextDecoder();
+  let accumulated = "";
+  let buffer = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed || !trimmed.startsWith("data: ")) continue;
+      const data = trimmed.slice(6);
+      if (data === "[DONE]") return accumulated;
+
+      try {
+        const parsed = JSON.parse(data);
+        const delta = parsed.choices?.[0]?.delta?.content;
+        if (delta) {
+          accumulated += delta;
+          onStream?.(accumulated);
+        }
+      } catch {
+        // skip malformed chunks
+      }
+    }
+  }
+
+  return accumulated || "No response received.";
 }
 
 export function createOrchestrator(onStream?: StreamHandler): TurnOrchestrator {
@@ -57,8 +147,4 @@ export function canShowJudgmentChip(
 ): boolean {
   if (!judgment) return false;
   return shouldShowJudgmentUI(flags, judgment.summary.showChip);
-}
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }

@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build --workspace=@ttj/phase-1-foundation && npm run build --workspace=@ttj/phase-2-judgment-engines && npm run build --workspace=@ttj/phase-3-pipeline && npm run build --workspace=@ttj/phase-5-feedback && npm run build --workspace=@ttj/phase-4-presentation",
+  "outputDirectory": "phases/phase-4-presentation/dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/api/chat", "destination": "/api/chat" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

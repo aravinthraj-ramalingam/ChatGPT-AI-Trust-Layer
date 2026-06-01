@@ -34,6 +34,12 @@
   gap: 0.5rem;
 }
 
+.app-header__settings-btn {
+  font-size: 1.125rem;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
 .chat-layout {
   flex: 1;
   display: flex;
@@ -76,6 +82,19 @@
   font-size: 1.75rem;
   font-weight: 400;
   color: var(--text);
+}
+
+.api-key-notice {
+  margin: 0 0 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: #3b2f0a;
+  color: #f59e0b;
+  font-size: 0.875rem;
+}
+
+.api-key-notice strong {
+  font-weight: 600;
 }
 
 .prompt-center {
