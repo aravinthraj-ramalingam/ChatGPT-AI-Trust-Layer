@@ -33,6 +33,21 @@
   color: var(--muted);
 }
 
+.judgment-card__badge--medium {
+  background: #3b2f0a;
+  color: #f59e0b;
+}
+
+.judgment-card__badge--high {
+  background: #3b1a0a;
+  color: #f97316;
+}
+
+.judgment-card__badge--very-high {
+  background: #3b0f0f;
+  color: #ef4444;
+}
+
 .judgment-card__why {
   background: none;
   border: none;

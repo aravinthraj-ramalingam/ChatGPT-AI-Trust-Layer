@@ -1,6 +1,5 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { ChatPage } from "./pages/ChatPage.js";
-import { LandingPage } from "./pages/LandingPage.js";
 import "./styles/app.css";
 
 /** App shell — ChatGPT-style header */
@@ -10,7 +9,7 @@ export function App() {
       <div className="app-shell">
         <header className="app-header">
           <Link to="/chat" className="app-header__brand">
-            Trust Through Judgment
+            ChatGPT AI Trust Layer
             <span className="app-header__chevron" aria-hidden="true">
               ▾
             </span>
@@ -22,7 +21,7 @@ export function App() {
           </div>
         </header>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Navigate to="/chat" replace />} />
           <Route path="/chat" element={<ChatPage />} />
         </Routes>
       </div>

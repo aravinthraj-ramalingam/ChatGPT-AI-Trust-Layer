@@ -4,15 +4,13 @@ import "./JudgmentCard.css";
 
 interface AssumptionCardProps {
   assumption: Assumption;
-  onGoToVerification?: (linkedId: string) => void;
 }
 
 /** Screen 3 — Assumption */
-export function AssumptionCard({
-  assumption,
-  onGoToVerification,
-}: AssumptionCardProps) {
+export function AssumptionCard({ assumption }: AssumptionCardProps) {
   const [whyOpen, setWhyOpen] = useState(false);
+  const impactLevel = assumption.impactLevel ?? "medium";
+  const badgeClass = `judgment-card__badge judgment-card__badge--${impactLevel}`;
 
   return (
     <article className="judgment-card" aria-labelledby={`asm-${assumption.id}`}>
@@ -20,7 +18,7 @@ export function AssumptionCard({
         {assumption.statement}
       </h4>
       <p className="judgment-card__impact">
-        <span className="judgment-card__badge">{assumption.impactLevel ?? "medium"} impact</span>
+        <span className={badgeClass}>{impactLevel} impact</span>
         — Changes recommendation if false
       </p>
       <button
@@ -33,17 +31,6 @@ export function AssumptionCard({
       </button>
       {whyOpen && (
         <p className="judgment-card__why-text">{assumption.showReason}</p>
-      )}
-      {onGoToVerification && (
-        <div className="judgment-card__footer">
-          <button
-            type="button"
-            className="judgment-card__link"
-            onClick={() => onGoToVerification(assumption.id)}
-          >
-            Go to verification →
-          </button>
-        </div>
       )}
     </article>
   );

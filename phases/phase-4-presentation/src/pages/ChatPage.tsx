@@ -11,22 +11,6 @@ import { submitLayerFeedback } from "../lib/feedback-client.js";
 export function ChatPage() {
   const chat = useChat();
 
-  function handleNavigateToVerification(linkedEntityId: string) {
-    chat.setActiveTab("verify");
-    chat.setHighlightVerificationFor(linkedEntityId);
-    requestAnimationFrame(() => {
-      const match = chat.latestAssistant?.judgment?.verifications.find(
-        (v) => v.linkedEntityId === linkedEntityId
-      );
-      if (match) {
-        document.getElementById(`ver-${match.id}`)?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }
-    });
-  }
-
   const composerProps = {
     onSubmit: chat.submitPrompt,
     disabled: chat.busy || Boolean(chat.pendingStakes),
@@ -83,7 +67,6 @@ export function ChatPage() {
                               doneVerificationIds={chat.doneVerificationIds}
                               onToggleVerification={chat.toggleVerificationDone}
                               highlightVerificationFor={chat.highlightVerificationFor}
-                              onNavigateToVerification={handleNavigateToVerification}
                               onLayerFeedback={(signal, comment) => {
                                 void submitLayerFeedback(
                                   msg.judgment!.answerId,

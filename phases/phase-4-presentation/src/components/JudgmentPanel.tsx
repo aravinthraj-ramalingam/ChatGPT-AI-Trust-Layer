@@ -15,7 +15,6 @@ interface JudgmentPanelProps {
   doneVerificationIds: Set<string>;
   onToggleVerification: (id: string) => void;
   highlightVerificationFor?: string | null;
-  onNavigateToVerification: (linkedEntityId: string) => void;
   onLayerFeedback: (
     signal: "positive" | "negative",
     comment: string
@@ -30,7 +29,6 @@ export function JudgmentPanel({
   doneVerificationIds,
   onToggleVerification,
   highlightVerificationFor,
-  onNavigateToVerification,
   onLayerFeedback,
 }: JudgmentPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -88,11 +86,7 @@ export function JudgmentPanel({
         ) : (
           <div className="judgment-panel__cards">
             {judgment.assumptions.map((a) => (
-              <AssumptionCard
-                key={a.id}
-                assumption={a}
-                onGoToVerification={() => onNavigateToVerification(a.id)}
-              />
+              <AssumptionCard key={a.id} assumption={a} />
             ))}
           </div>
         )}
@@ -110,11 +104,7 @@ export function JudgmentPanel({
         ) : (
           <div className="judgment-panel__cards">
             {judgment.risks.map((r) => (
-              <RiskCard
-                key={r.id}
-                risk={r}
-                onGoToVerification={() => onNavigateToVerification(r.id)}
-              />
+              <RiskCard key={r.id} risk={r} />
             ))}
           </div>
         )}

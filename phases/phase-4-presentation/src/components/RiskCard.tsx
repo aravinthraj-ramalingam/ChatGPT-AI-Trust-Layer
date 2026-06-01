@@ -4,12 +4,14 @@ import "./JudgmentCard.css";
 
 interface RiskCardProps {
   risk: DecisionRisk;
-  onGoToVerification?: (linkedId: string) => void;
 }
 
 /** Screen 4 — Decision risk */
-export function RiskCard({ risk, onGoToVerification }: RiskCardProps) {
+export function RiskCard({ risk }: RiskCardProps) {
   const [whyOpen, setWhyOpen] = useState(false);
+  const impactScore = risk.impactScore;
+  const level = impactScore >= 0.85 ? "very-high" : impactScore >= 0.7 ? "high" : "medium";
+  const badgeClass = `judgment-card__badge judgment-card__badge--${level}`;
 
   return (
     <article
@@ -19,6 +21,9 @@ export function RiskCard({ risk, onGoToVerification }: RiskCardProps) {
       <h4 id={`risk-${risk.id}`} className="judgment-card__title">
         {risk.description}
       </h4>
+      <p className="judgment-card__impact">
+        <span className={badgeClass}>{level.replace("-", " ")} risk</span>
+      </p>
       <p className="judgment-card__meta">
         <strong>If true:</strong> {risk.decisionImpact}
       </p>
@@ -35,17 +40,6 @@ export function RiskCard({ risk, onGoToVerification }: RiskCardProps) {
       </button>
       {whyOpen && (
         <p className="judgment-card__why-text">{risk.showReason}</p>
-      )}
-      {onGoToVerification && (
-        <div className="judgment-card__footer">
-          <button
-            type="button"
-            className="judgment-card__link"
-            onClick={() => onGoToVerification(risk.id)}
-          >
-            Verify →
-          </button>
-        </div>
       )}
     </article>
   );

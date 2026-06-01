@@ -48,6 +48,7 @@
   font-size: 0.8125rem;
   color: var(--muted);
   text-align: center;
+  word-break: break-word;
 }
 
 .stakes-options {
@@ -63,7 +64,7 @@
   align-items: flex-start;
   gap: 0.125rem;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem 0.75rem 1.75rem;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface);

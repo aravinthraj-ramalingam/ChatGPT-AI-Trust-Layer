@@ -141,13 +141,22 @@ export function useChat() {
       };
 
       setMessages((prev) => [...prev, userMsg]);
-      const detection = detectStakesForConfirmation(promptContent);
+
+      // If stakes already chosen in this session, skip dialog and go directly
       if (sessionUsage) {
-        detection.suggestedUsage = sessionUsage;
+        setBusy(true);
+        setJudgmentExpanded(false);
+        setDoneVerificationIds(new Set());
+        setHighlightVerificationFor(null);
+        void runAnswerGeneration(promptContent, sessionUsage);
+        return;
       }
+
+      // First prompt: show stakes confirmation
+      const detection = detectStakesForConfirmation(promptContent);
       setPendingStakes({ promptContent, detection });
     },
-    [busy, pendingStakes, sessionUsage]
+    [busy, pendingStakes, sessionUsage, runAnswerGeneration]
   );
 
   const confirmStakes = useCallback(
