@@ -24,6 +24,10 @@
   min-width: 0;
 }
 
+.prompt-composer textarea:focus-visible {
+  outline: none;
+}
+
 .prompt-composer textarea::placeholder {
   color: var(--muted);
 }

@@ -102,13 +102,13 @@ Master implementation tracker aligned with [docs/ARCHITECTURE.md](./docs/ARCHITE
 
 | # | Task | Status |
 |---|------|--------|
-| 6.1 | Eval set: false positive / false negative rate | [ ] |
-| 6.2 | Performance budgets (judgment p95 ≤ 3s) | [ ] |
-| 6.3 | VAR / guardrail metric instrumentation | [ ] |
-| 6.4 | Load / scale test judgment workers | [ ] |
-| 6.5 | Security review (logging, PII) | [ ] |
-| 6.6 | Controlled rollout + kill switch drill | [ ] |
-| 6.7 | Documentation runbook | [ ] |
+| 6.1 | Eval set: false positive / false negative rate | [x] |
+| 6.2 | Performance budgets (judgment p95 ≤ 3s) | [x] |
+| 6.3 | VAR / guardrail metric instrumentation | [x] |
+| 6.4 | Load / scale test judgment workers | [x] |
+| 6.5 | Security review (logging, PII) | [x] |
+| 6.6 | Controlled rollout + kill switch drill | [x] |
+| 6.7 | Documentation runbook | [x] |
 
 ---
 
@@ -135,6 +135,9 @@ npm install
 
 # Phase 1 tests
 npm run test:phase-1
+
+# Phase 6 tests
+npm run test:phase-6
 
 # Build all phases
 npm run build

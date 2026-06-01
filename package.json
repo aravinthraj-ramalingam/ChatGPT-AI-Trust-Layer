@@ -8,7 +8,8 @@
     "phases/phase-2-judgment-engines",
     "phases/phase-3-pipeline",
     "phases/phase-4-presentation",
-    "phases/phase-5-feedback"
+    "phases/phase-5-feedback",
+    "phases/phase-6-hardening"
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
@@ -19,6 +20,7 @@
     "test:phase-4": "npm run test -w @ttj/phase-4-presentation",
     "dev:ui": "npm run dev -w @ttj/phase-4-presentation",
     "test:phase-5": "npm run test -w @ttj/phase-5-feedback",
+    "test:phase-6": "npm run test -w @ttj/phase-6-hardening",
     "start:api": "npm run build -w @ttj/phase-5-feedback && npm run start:api -w @ttj/phase-5-feedback"
   },
   "engines": {

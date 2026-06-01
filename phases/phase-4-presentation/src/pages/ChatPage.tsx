@@ -27,12 +27,6 @@ export function ChatPage() {
     });
   }
 
-  function fillDemoPrompt() {
-    const demo =
-      "Should we enter the EU market in 2026 given our regulatory timeline and budget?";
-    chat.submitPrompt(demo);
-  }
-
   const composerProps = {
     onSubmit: chat.submitPrompt,
     disabled: chat.busy || Boolean(chat.pendingStakes),
@@ -48,22 +42,6 @@ export function ChatPage() {
             <h2>What are you working on?</h2>
             <div className="prompt-center">
               <PromptComposer {...composerProps} variant="hero" />
-              <div className="quick-actions">
-                <button type="button" className="quick-action" onClick={fillDemoPrompt}>
-                  <span aria-hidden="true">◇</span> EU market decision
-                </button>
-                <button
-                  type="button"
-                  className="quick-action"
-                  onClick={() =>
-                    chat.submitPrompt(
-                      "Help me brainstorm positioning ideas for a new feature"
-                    )
-                  }
-                >
-                  <span aria-hidden="true">✎</span> Brainstorm
-                </button>
-              </div>
             </div>
           </div>
         ) : (
