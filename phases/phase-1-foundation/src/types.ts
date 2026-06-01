@@ -7,7 +7,7 @@ export type IntentClass =
   | "creative"
   | "chitchat";
 
-export type StakesSignal = "low" | "medium" | "high";
+export type StakesSignal = "low" | "medium" | "high" | "very_high";
 
 export type JudgmentStatus =
   | "pending"

@@ -5,6 +5,7 @@ import {
   DECISION_INTENT_PATTERNS,
   HIGH_STAKES_PATTERNS,
   PLANNING_INTENT_PATTERNS,
+  VERY_HIGH_STAKES_PATTERNS,
 } from "./constants.js";
 
 /**
@@ -38,6 +39,9 @@ function detectStakes(content: string, intent: IntentClass): StakesSignal {
   if (intent === "chitchat" || intent === "creative") {
     return "low";
   }
+  if (VERY_HIGH_STAKES_PATTERNS.some((p) => p.test(content))) {
+    return "very_high";
+  }
   if (HIGH_STAKES_PATTERNS.some((p) => p.test(content))) {
     return "high";
   }
@@ -48,4 +52,25 @@ function detectStakes(content: string, intent: IntentClass): StakesSignal {
     return "medium";
   }
   return "low";
+}
+
+/** Map auto-detected stakes to a human-readable detection reason */
+export function describeDetectedStakes(
+  stakes: StakesSignal,
+  intent: IntentClass
+): string {
+  switch (stakes) {
+    case "very_high":
+      return "Looks like an executive or critical decision";
+    case "high":
+      return "Looks like a client-facing or high-impact decision";
+    case "medium":
+      return "Looks like an internal work product";
+    case "low":
+      return intent === "informational"
+        ? "Looks like brainstorming or learning"
+        : "Looks like exploratory use";
+    default:
+      return "Confirm how you will use this output";
+  }
 }

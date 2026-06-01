@@ -1,0 +1,173 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid transparent;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.app-header__chevron {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chat-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 48rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  min-height: 0;
+}
+
+.chat-main--empty {
+  justify-content: center;
+  padding-bottom: 6rem;
+}
+
+.messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 0 1rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.empty-hero {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.empty-hero h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.prompt-center {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.prompt-dock {
+  padding: 0.75rem 0 1.25rem;
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.prompt-dock--bottom {
+  margin-top: auto;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.quick-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.quick-action:hover {
+  background: var(--surface-hover);
+}
+
+.landing {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.landing-hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.landing-hero p {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.btn-primary {
+  background: var(--text);
+  color: #000;
+  border: none;
+  border-radius: 999px;
+  padding: 0.625rem 1.125rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.btn-ghost:hover {
+  background: var(--surface-hover);
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@ttj/phase-5-feedback",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./node": {
+      "types": "./dist/node.d.ts",
+      "import": "./dist/node.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "start:api": "node dist/api/start.js"
+  },
+  "dependencies": {
+    "@ttj/phase-1-foundation": "*",
+    "@ttj/phase-2-judgment-engines": "*",
+    "@ttj/phase-3-pipeline": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.5"
+  }
+}

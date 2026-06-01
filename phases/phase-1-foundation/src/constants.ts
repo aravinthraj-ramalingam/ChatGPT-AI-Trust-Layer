@@ -56,6 +56,13 @@ export const HIGH_STAKES_PATTERNS = [
   /\b(medical|diagnos|prescri|dosage|patient)\b/i,
   /\b(acquisition|merger|ipo|earnings|revenue forecast)\b/i,
   /\b(should we|go\/no-go|decide whether)\b/i,
+  /\b(client|customer-facing|external|publish|release)\b/i,
+] as const;
+
+export const VERY_HIGH_STAKES_PATTERNS = [
+  /\b(executive|board|ceo|cfo|cto|critical|mission-critical)\b/i,
+  /\b(go\/no-go|bet the company|material impact|regulatory filing)\b/i,
+  /\b(layoff|acquisition|merger|ipo|sec filing|fda approval)\b/i,
 ] as const;
 
 export const DECISION_INTENT_PATTERNS = [

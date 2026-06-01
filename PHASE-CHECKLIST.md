@@ -33,13 +33,13 @@ Master implementation tracker aligned with [docs/ARCHITECTURE.md](./docs/ARCHITE
 
 | # | Task | Status |
 |---|------|--------|
-| 2.1 | Assumption Engine interface + candidate extraction | [ ] |
-| 2.2 | Decision Risk Engine interface + candidate extraction | [ ] |
-| 2.3 | Verification Engine interface + action generation | [ ] |
-| 2.4 | Wire Phase 1 filters to engine outputs | [ ] |
-| 2.5 | Dedupe / merge duplicate assumptions & risks | [ ] |
-| 2.6 | Engine unit tests + fixture answers | [ ] |
-| 2.7 | Optional LLM adapter (pluggable provider) | [ ] |
+| 2.1 | Assumption Engine interface + candidate extraction | [x] |
+| 2.2 | Decision Risk Engine interface + candidate extraction | [x] |
+| 2.3 | Verification Engine interface + action generation | [x] |
+| 2.4 | Wire Phase 1 filters to engine outputs | [x] |
+| 2.5 | Dedupe / merge duplicate assumptions & risks | [x] |
+| 2.6 | Engine unit tests + fixture answers | [x] |
+| 2.7 | Optional LLM adapter (pluggable provider) | [x] |
 
 ---
 
@@ -50,13 +50,13 @@ Master implementation tracker aligned with [docs/ARCHITECTURE.md](./docs/ARCHITE
 
 | # | Task | Status |
 |---|------|--------|
-| 3.1 | Answer Layer stub / adapter interface | [ ] |
-| 3.2 | Judgment pipeline orchestrator (post-answer async) | [ ] |
-| 3.3 | In-memory Judgment Store | [ ] |
-| 3.4 | `JudgmentResult` DTO for presentation | [ ] |
-| 3.5 | Regenerate → new judgment artifact | [ ] |
-| 3.6 | Integration tests (prompt → answer → judgment) | [ ] |
-| 3.7 | Feature flag + kill switch hooks | [ ] |
+| 3.1 | Answer Layer stub / adapter interface | [x] |
+| 3.2 | Judgment pipeline orchestrator (post-answer async) | [x] |
+| 3.3 | In-memory Judgment Store | [x] |
+| 3.4 | `JudgmentResult` DTO for presentation | [x] |
+| 3.5 | Regenerate → new judgment artifact | [x] |
+| 3.6 | Integration tests (prompt → answer → judgment) | [x] |
+| 3.7 | Feature flag + kill switch hooks | [x] |
 
 ---
 
@@ -67,15 +67,15 @@ Master implementation tracker aligned with [docs/ARCHITECTURE.md](./docs/ARCHITE
 
 | # | Task | Status |
 |---|------|--------|
-| 4.1 | App shell + routing | [ ] |
-| 4.2 | Screen 1 — Prompt composer | [ ] |
-| 4.3 | Screen 2 — Answer + streaming | [ ] |
-| 4.4 | Screen 3 — Assumptions panel | [ ] |
-| 4.5 | Screen 4 — Decision risks panel | [ ] |
-| 4.6 | Screen 5 — Verification checklist | [ ] |
-| 4.7 | Judgment chip (L1) + collapse states | [ ] |
-| 4.8 | WCAG 2.1 AA pass (keyboard, ARIA) | [ ] |
-| 4.9 | Connect UI to Phase 3 API | [ ] |
+| 4.1 | App shell + routing | [x] |
+| 4.2 | Screen 1 — Prompt composer | [x] |
+| 4.3 | Screen 2 — Answer + streaming | [x] |
+| 4.4 | Screen 3 — Assumptions panel | [x] |
+| 4.5 | Screen 4 — Decision risks panel | [x] |
+| 4.6 | Screen 5 — Verification checklist | [x] |
+| 4.7 | Judgment chip (L1) + collapse states | [x] |
+| 4.8 | WCAG 2.1 AA pass (keyboard, ARIA) | [x] |
+| 4.9 | Connect UI to Phase 3 API | [x] |
 
 ---
 
@@ -86,12 +86,12 @@ Master implementation tracker aligned with [docs/ARCHITECTURE.md](./docs/ARCHITE
 
 | # | Task | Status |
 |---|------|--------|
-| 5.1 | Feedback entity validation | [ ] |
-| 5.2 | Feedback Engine (ingest + store) | [ ] |
-| 5.3 | `POST /feedback` endpoint | [ ] |
-| 5.4 | `POST /turns/{id}/judgment` endpoint | [ ] |
-| 5.5 | Per-target thumbs (assumption, risk, verification, layer) | [ ] |
-| 5.6 | Feedback aggregation for eval (no PII) | [ ] |
+| 5.1 | Feedback entity validation | [x] |
+| 5.2 | Feedback Engine (ingest + store) | [x] |
+| 5.3 | `POST /feedback` endpoint | [x] |
+| 5.4 | `POST /turns/{id}/judgment` endpoint | [x] |
+| 5.5 | Layer-only feedback (footer; no per-item thumbs) | [x] |
+| 5.6 | Feedback aggregation for eval (no PII) | [x] |
 
 ---
 

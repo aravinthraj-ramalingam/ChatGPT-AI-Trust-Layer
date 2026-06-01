@@ -1,0 +1,44 @@
+.judgment-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.judgment-chip:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.judgment-chip__counts {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.judgment-chip__segment strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.judgment-chip__dot {
+  color: var(--muted);
+}
+
+.judgment-chip__chevron {
+  color: var(--muted);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}

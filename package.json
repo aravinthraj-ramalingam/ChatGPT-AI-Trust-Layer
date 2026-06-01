@@ -4,12 +4,22 @@
   "private": true,
   "description": "Trust Through Judgment — ChatGPT judgment layer MVP",
   "workspaces": [
-    "phases/phase-1-foundation"
+    "phases/phase-1-foundation",
+    "phases/phase-2-judgment-engines",
+    "phases/phase-3-pipeline",
+    "phases/phase-4-presentation",
+    "phases/phase-5-feedback"
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
-    "test:phase-1": "npm run test -w @ttj/phase-1-foundation"
+    "test:phase-1": "npm run test -w @ttj/phase-1-foundation",
+    "test:phase-2": "npm run test -w @ttj/phase-2-judgment-engines",
+    "test:phase-3": "npm run test -w @ttj/phase-3-pipeline",
+    "test:phase-4": "npm run test -w @ttj/phase-4-presentation",
+    "dev:ui": "npm run dev -w @ttj/phase-4-presentation",
+    "test:phase-5": "npm run test -w @ttj/phase-5-feedback",
+    "start:api": "npm run build -w @ttj/phase-5-feedback && npm run start:api -w @ttj/phase-5-feedback"
   },
   "engines": {
     "node": ">=18"

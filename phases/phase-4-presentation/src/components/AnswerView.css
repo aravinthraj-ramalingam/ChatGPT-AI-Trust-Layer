@@ -1,0 +1,31 @@
+.answer-view {
+  color: var(--text);
+}
+
+.answer-view__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.answer-view__role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.answer-view__status {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.answer-view__body p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.answer-view__body p:last-child {
+  margin-bottom: 0;
+}

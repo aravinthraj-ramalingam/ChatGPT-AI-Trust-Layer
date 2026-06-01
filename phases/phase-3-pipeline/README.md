@@ -1,27 +1,55 @@
 # Phase 3 — Pipeline & Answer Layer
 
-**Status:** Not started
+**Status:** Implemented
 
-## Goal
+Answer-first turn orchestration with async judgment, in-memory store, and feature flags.
 
-Answer-first orchestration: stream answer, run judgment async, fail-open on errors.
+## Modules
 
-## Checklist
+| Module | Responsibility |
+|--------|----------------|
+| `turn-orchestrator.ts` | `executeTurn`, `regenerateTurn`, `waitForJudgment` |
+| `answer-layer/stub-answer-layer.ts` | MVP answer adapter (swap for ChatGPT) |
+| `judgment-store.ts` | `InMemoryJudgmentStore` |
+| `judgment-result-mapper.ts` | `JudgmentResult` DTO for UI |
+| `feature-flags.ts` | `trust_through_judgment_enabled` + kill switch |
 
-See [PHASE-CHECKLIST.md](../../PHASE-CHECKLIST.md) — Phase 3 section.
+## Usage
 
-## Planned structure
+```typescript
+import { TurnOrchestrator, StubAnswerLayer } from "@ttj/phase-3-pipeline";
 
+const orchestrator = new TurnOrchestrator({
+  answerLayer: new StubAnswerLayer((prompt) => generateFromLLM(prompt)),
+});
+
+// Answer-first (judgment async)
+const turn = await orchestrator.executeTurn({
+  conversationId: "conv-1",
+  promptContent: userPrompt,
+});
+
+// Or wait for judgment (tests / explicit refresh)
+const complete = await orchestrator.executeTurn({
+  conversationId: "conv-1",
+  promptContent: userPrompt,
+  awaitJudgment: true,
+});
+
+console.log(complete.judgment?.summary.chipLabel);
 ```
-src/
-  answer-layer.ts
-  judgment-pipeline.ts
-  judgment-store.ts
-  feature-flags.ts
-tests/
+
+## Environment
+
+| Variable | Effect |
+|----------|--------|
+| `TRUST_THROUGH_JUDGMENT_ENABLED=false` | Disables judgment pipeline |
+| `JUDGMENT_KILL_SWITCH=true` | Global kill switch |
+
+## Tests
+
+```bash
+npm run test -w @ttj/phase-3-pipeline
 ```
 
-## Depends on
-
-- Phase 1 — decision logic
-- Phase 2 — engines
+See [PHASE-CHECKLIST.md](../../PHASE-CHECKLIST.md).

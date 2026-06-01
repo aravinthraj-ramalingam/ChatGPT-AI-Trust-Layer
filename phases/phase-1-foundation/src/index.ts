@@ -1,7 +1,15 @@
 export * from "./types.js";
 export * from "./constants.js";
 export * from "./classify-prompt.js";
-export * from "./eligibility.js";
+export {
+  evaluateJudgmentEligibility,
+  shouldRunAssumptionDetection,
+  shouldRunRiskDetection,
+  applyEligibilityToAnswer,
+  estimateTokenCount,
+  isExplicitInPromptOrAnswer,
+} from "./eligibility.js";
+export type { EligibilityInput, EligibilityResult } from "./eligibility.js";
 export * from "./rank-and-cap.js";
 export * from "./display-summary.js";
 export * from "./judgment-filters.js";

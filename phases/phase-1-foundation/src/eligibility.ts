@@ -64,7 +64,22 @@ export function shouldRunRiskDetection(
 ): boolean {
   if (intent === "creative" || intent === "chitchat") return false;
   if (intent === "informational" && stakes === "low") return false;
+  if (stakes === "very_high" || stakes === "high") return true;
   return stakes !== "low" || intent === "decision" || intent === "planning";
+}
+
+/** Normalize stakes for scoring thresholds */
+export function stakesWeight(stakes: StakesSignal): number {
+  switch (stakes) {
+    case "very_high":
+      return 1;
+    case "high":
+      return 0.85;
+    case "medium":
+      return 0.55;
+    case "low":
+      return 0.25;
+  }
 }
 
 export function applyEligibilityToAnswer(
